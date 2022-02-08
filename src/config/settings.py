@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     # My apps
     "users",
+    "groups",
 ]
 
 MIDDLEWARE = [
