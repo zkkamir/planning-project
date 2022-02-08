@@ -1,5 +1,6 @@
 import pytest
 from django.contrib.auth import get_user_model
+from django.db import IntegrityError
 from django.utils.text import slugify
 
 from groups.models import Group
@@ -14,9 +15,9 @@ from groups.models import Group
         ("TEST NAME", "TEST DESCRIPTION"),
     ],
 )
-def test_create_group(name, description):
+def test_create_group_is_successful(name, description):
     """
-    Test group instance creation.
+    Test the happy path Group instance creation.
     """
     user = get_user_model().objects.create_user(
         email="test@test.test", password="testtest"
@@ -29,3 +30,20 @@ def test_create_group(name, description):
     assert group.description == description
     assert group.owner == user
     assert group.slug == slugify(name)
+
+
+@pytest.mark.django_db
+def test_creating_duplicate_group_fails():
+    """
+    Test Groups cannot be created with the same name.
+    """
+    user = get_user_model().objects.create_user(
+        email="test@test.test", password="testtest"
+    )
+    group1 = Group.objects.create(  # noqa
+        name="test", description="test1", owner=user
+    )
+    with pytest.raises(IntegrityError):
+        group2 = Group.objects.create(  # noqa
+            name="test", description="test2", owner=user
+        )
