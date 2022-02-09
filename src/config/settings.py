@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     # My apps
     "users",
     "groups",
+    "tasks",
 ]
 
 MIDDLEWARE = [
