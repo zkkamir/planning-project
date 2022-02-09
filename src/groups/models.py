@@ -14,7 +14,7 @@ class Group(models.Model):
     owner = models.ForeignKey(
         get_user_model(), on_delete=models.CASCADE, verbose_name=_("owner")
     )
-    slug = models.SlugField(_("group slug"), editable=False, unique=True)
+    slug = models.SlugField(_("group slug"))
 
     class Meta:
         unique_together = (

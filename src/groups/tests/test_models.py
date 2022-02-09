@@ -1,5 +1,4 @@
 import pytest
-from django.contrib.auth import get_user_model
 from django.db import IntegrityError
 from django.utils.text import slugify
 
@@ -15,13 +14,10 @@ from groups.models import Group
         ("TEST NAME", "TEST DESCRIPTION"),
     ],
 )
-def test_create_group_is_successful(name, description):
+def test_create_group_is_successful(name, description, user):
     """
     Test the happy path Group instance creation.
     """
-    user = get_user_model().objects.create_user(
-        email="test@test.test", password="testtest"
-    )
     group = Group.objects.create(
         name=name, description=description, owner=user
     )
@@ -33,13 +29,10 @@ def test_create_group_is_successful(name, description):
 
 
 @pytest.mark.django_db
-def test_creating_duplicate_group_fails():
+def test_creating_duplicate_group_fails(user):
     """
-    Test Groups cannot be created with the same name.
+    Test same user cannot create Groups with the same name.
     """
-    user = get_user_model().objects.create_user(
-        email="test@test.test", password="testtest"
-    )
     group1 = Group.objects.create(  # noqa
         name="test", description="test1", owner=user
     )
@@ -47,3 +40,19 @@ def test_creating_duplicate_group_fails():
         group2 = Group.objects.create(  # noqa
             name="test", description="test2", owner=user
         )
+
+
+@pytest.mark.django_db
+def test_different_users_can_create_same_group(create_user):
+    """
+    Test two different users can have groups with the same name.
+    """
+    user1 = create_user(email="user1@test.test")
+    user2 = create_user(email="user2@test.test")
+    user1_group = Group.objects.create(
+        name="test", description="test", owner=user1
+    )
+    user2_group = Group.objects.create(
+        name="test", description="test", owner=user2
+    )
+    assert user1_group.name == user2_group.name
