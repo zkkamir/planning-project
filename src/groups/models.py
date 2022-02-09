@@ -11,7 +11,9 @@ class Group(models.Model):
     """
 
     name = models.CharField(_("group name"), max_length=127)
-    description = models.TextField(_("group description"))
+    description = models.TextField(
+        _("group description"), blank=True, null=True
+    )
     owner = models.ForeignKey(
         get_user_model(), on_delete=models.CASCADE, verbose_name=_("owner")
     )
