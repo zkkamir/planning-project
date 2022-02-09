@@ -6,7 +6,8 @@ from django.utils.translation import gettext_lazy as _
 
 class Group(models.Model):
     """
-    A class to represent a group of tasks.
+    A class to represent a group of tasks. this group can be a project with
+    different tasks and subtasks, a todo list, a list of life goals , etc.
     """
 
     name = models.CharField(_("group name"), max_length=127)
