@@ -10,8 +10,8 @@ from groups.models import Group
     "name, description",
     [
         ("Test Name", "Test Description"),
-        ("teST_name", "teST_description"),
-        ("TEST NAME", "TEST DESCRIPTION"),
+        ("teST_name", None),
+        ("TEST NAME", ""),
     ],
 )
 def test_create_group_is_successful(name, description, user):
