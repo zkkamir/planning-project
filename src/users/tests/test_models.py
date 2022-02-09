@@ -1,18 +1,15 @@
 import pytest
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
 
 
 @pytest.mark.django_db
-def test_create_user():
+def test_create_user(django_user_model):
     """
     Test user creation.
     """
-    user = User.objects.create_user(
+    user = django_user_model.objects.create_user(
         email="test@test.test", password="testtest"
     )
-    assert User.objects.count() == 1
+    assert django_user_model.objects.count() == 1
     assert user.email == "test@test.test"
     assert user.is_active is True
     assert user.is_staff is False
@@ -20,22 +17,22 @@ def test_create_user():
     with pytest.raises(AttributeError):
         user.username
     with pytest.raises(TypeError):
-        User.objects.create_user()
+        django_user_model.objects.create_user()
     with pytest.raises(TypeError):
-        User.objects.create_user(email="")
+        django_user_model.objects.create_user(email="")
     with pytest.raises(ValueError):
-        User.objects.create_user(email="", password="foo")
+        django_user_model.objects.create_user(email="", password="foo")
 
 
 @pytest.mark.django_db
-def test_create_superuser():
+def test_create_superuser(django_user_model):
     """
     Test superuser creation.
     """
-    user = User.objects.create_superuser(
+    user = django_user_model.objects.create_superuser(
         email="supertest@test.test", password="testtest"
     )
-    assert User.objects.count() == 1
+    assert django_user_model.objects.count() == 1
     assert user.email == "supertest@test.test"
     assert user.is_active is True
     assert user.is_staff is True
@@ -43,6 +40,6 @@ def test_create_superuser():
     with pytest.raises(AttributeError):
         user.username
     with pytest.raises(ValueError):
-        User.objects.create_superuser(
+        django_user_model.objects.create_superuser(
             email="supertest@test.test", password="foo", is_superuser=False
         )
