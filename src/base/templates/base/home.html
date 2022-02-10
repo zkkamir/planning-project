@@ -3,5 +3,10 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-  <h1>This is the home page!</h1>
+  <h1>Wellcome</h1>
+  <h3>You can use this website to plan and make better use of your time.</h3>
+  <p>###Introduction of how the website works###</p>
+  {% if not user.is_authenticated%}
+    <p>to start planning you need to <a href="{% url 'account_signup' %}">Sign up</a> or <a href="{% url 'account_login'%}">Log in</a></p>
+  {% endif %}
 {% endblock content %}
