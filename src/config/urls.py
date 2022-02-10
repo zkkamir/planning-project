@@ -9,7 +9,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
     # TEMP
-    path("", TemplateView.as_view(template_name="_base.html"), name="home"),
+    path("", include("base.urls")),
     path(
         "about/",
         TemplateView.as_view(template_name="_base.html"),

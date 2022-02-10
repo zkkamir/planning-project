@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "users",
     "groups",
     "tasks",
+    "base",
 ]
 
 MIDDLEWARE = [
