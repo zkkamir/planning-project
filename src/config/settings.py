@@ -153,8 +153,8 @@ AUTH_USER_MODEL = "users.CustomUser"
 
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL = "home"
-ACCOUNT_LOGOUT_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "base:home"
+ACCOUNT_LOGOUT_REDIRECT_URL = "base:home"
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
