@@ -41,7 +41,9 @@ class Task(models.Model):
     tag = models.PositiveSmallIntegerField(
         _("tag"), choices=Tags.choices, blank=True, null=True
     )
-    reason = models.CharField(_("why this has to be done"), max_length=255)
+    reason = models.CharField(
+        _("why this has to be done"), max_length=255, blank=True, null=True
+    )
     groups = models.ManyToManyField(
         Group,
         related_name="items",

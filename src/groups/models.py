@@ -15,7 +15,10 @@ class Group(models.Model):
         _("group description"), blank=True, null=True
     )
     owner = models.ForeignKey(
-        get_user_model(), on_delete=models.CASCADE, verbose_name=_("owner")
+        get_user_model(),
+        on_delete=models.CASCADE,
+        verbose_name=_("owner"),
+        related_name="task_groups",
     )
     slug = models.SlugField(_("group slug"))
 

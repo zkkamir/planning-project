@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+
+{% block title %}Your Plans{% endblock title %}
+
+{% block content %}
+  <ul>
+    {% for task in tasks %}
+      <li>{{ task }}</li>
+    {% endfor %}
+  </ul>
+
+  <ul>
+    {% for group in groups %}
+      <li>{{ group }}</li>
+    {% endfor %}
+  </ul>
+  
+{% endblock content %}
