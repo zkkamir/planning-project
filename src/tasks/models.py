@@ -51,7 +51,7 @@ class Task(models.Model):
 
     @property
     def has_children(self):
-        return bool(self.children.all().count())
+        return self.children.exists()
 
     def save(self, *args, **kwargs):
         if not self.slug:
