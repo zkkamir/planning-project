@@ -2,7 +2,7 @@ import pytest
 
 
 @pytest.fixture
-def create_user(db, django_user_model):
+def create_user(django_user_model):
     def make_user(**kwargs):
         """
         Create and return a custom user
@@ -17,6 +17,6 @@ def create_user(db, django_user_model):
 
 
 @pytest.fixture
-def user(db, create_user):
+def user(create_user):
     """create and return a default custom user."""
     return create_user()
