@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.google",
     "crispy_forms",
     "debug_toolbar",
+    "tailwind",
+    "theme",
     # My apps
     "users",
     "groups",
@@ -166,3 +168,6 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+
+
+TAILWIND_APP_NAME = "theme"
